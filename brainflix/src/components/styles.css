@@ -1,0 +1,145 @@
+@font-face {
+  font-family: AvenirNextRegular;
+  src: url(../Assets/Font/AvenirNextLTPro-Regular.otf);
+}
+@font-face {
+  font-family: AvenirNextBold;
+  src: url(../Assets/Font/AvenirNextLTPro-Bold.otf);
+}
+.main-video__description-box {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+@media (min-width: 600px) {
+  .main-video__description-box {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 36px;
+  }
+}
+
+.main-video__description {
+  padding: 0px;
+}
+
+.main-video__description-box1 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: flex-start;
+  color: #AFAFAF;
+}
+.main-video__description-box1 :first-child {
+  color: #323232;
+}
+
+.main-video__description-box2 {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  align-items: flex-start;
+  color: #AFAFAF;
+}
+
+.main-video__description-channel {
+  font-family: AvenirNextBold;
+}
+
+.main-video__description-title {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+  color: #323232;
+}
+
+body {
+  color: #323232;
+}
+
+.comment-form {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+@media (min-width: 600px) {
+  .comment-form {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+.comment-form button {
+  height: 40px;
+  width: 100%;
+  border-radius: 4px;
+  background-color: #0095FF;
+  display: flex;
+}
+@media (min-width: 600px) {
+  .comment-form button {
+    min-width: 150px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+.comment-form button:hover {
+  background-color: #0065AD;
+}
+.comment-form .comment-form__input {
+  min-height: 36px;
+  min-width: 240px;
+  max-width: 100%;
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 4px;
+  border: 1px solid #E1E1E1;
+}
+@media (min-width: 600px) {
+  .comment-form .comment-form__input {
+    min-height: 40px;
+    padding: 16px;
+  }
+}
+
+.comment-form__input:active {
+  border: 2px solid #0095FF;
+}
+
+.comment-form__input:invalid {
+  border: 1px solid #D22D2D;
+}
+
+.comments-number {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 24px;
+}
+@media (min-width: 600px) {
+  .comments-number {
+    padding-top: 36px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+.video-list__image {
+  width: 150px;
+  height: auto;
+  border-radius: 4px;
+  background-color: #E1E1E1;
+}
+
+.video-list__container {
+  display: flex;
+  padding-left: 16px;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.next-videos {
+  display: flex;
+  padding: 16px;
+}
+@media (min-width: 600px) {
+  .next-videos {
+    padding: 24px;
+  }
+}/*# sourceMappingURL=styles.css.map */
