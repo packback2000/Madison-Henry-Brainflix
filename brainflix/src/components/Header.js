@@ -1,9 +1,9 @@
 import React from 'react';
-import Logo from "../3.0 - Assets/Logo/BrainFlix-logo.svg"
+import Logo from "../Assets/Logo/BrainFlix-logo.svg"
 import "./Header.css"
 import Mohan from "../Assets/Images/Mohan-muruge.jpg"
 import Upload from "../Assets/Icons/upload.svg"
-import Search from "../Assets/Icons/search.svg"
+
 
 
 class Comments extends React.Component {
@@ -29,14 +29,14 @@ class Comments extends React.Component {
     render() {
         return(
             <section className='Header'>
-                <img src={Logo} className='logo'/>
+                <img src={Logo} className='logo' alt="Brainflix logo" />
                 <form onSubmit={this.handleSubmit} className='header-form'>
                     <div className='header-input__container'>
                     <input type="text" onChange={this.handleChange} className='header-form__input' placeholder="Search" />
                     
-                    <input type="image" className='header-form__image' src={Mohan} />
+                    <input type="image" className='header-form__image' src={Mohan} alt='Mohan' />
                     </div>
-                    <button type='submit' className='header-form__button'><img src={Upload}></img>Upload</button>
+                    <button type='submit' className='header-form__button'><img src={Upload} alt="upload icon"></img>Upload</button>
                 </form>
             </section>
         )

@@ -9,20 +9,22 @@ import Comment from "../Assets/Icons/add_comment.svg"
 
 class PracticeVideoList extends React.Component {
     constructor(props) {
-        super(props)
-        this.handleClick = this.handleClick.bind(this)
+        super(props);
         this.state = {
             videos,
             videodetails
-        }
-       
+        };
+        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick() {
-        this.setState(
-            console.log("has been clicked"+this.setState.videodetails.id)
-            
-        )
+    handleClick = (event) => {
+        console.log("click")
+        event.preventDefault();
+
+        this.setState({
+            videodetails: [...this.state.videodetails.id]
+        })
+        
     }
 
     render() {
@@ -48,6 +50,7 @@ class PracticeVideoList extends React.Component {
                     title={video.title}
                     image={video.image}
                     channel={video.channel}
+                    handleClick = {this.handleClick}
                 />
                )}
 
@@ -102,8 +105,6 @@ function Player(props) {
             <div>
                 <p className="comments-number">{props.comments.length} Comments</p>
                 <form className='comment-form'>
-                
-                    <br />
                         <input type="image" className='comment-form__image' src={Mohan} alt="text" />
                         <div className='comment-form__input-container'>
                         <label>JOIN THE CONVERSATION</label>
@@ -126,12 +127,12 @@ function Player(props) {
 function VideoList(props) {
 
     return (
-        <section className="next-videos" onClick={props.handleClick}>
+        <button className="next-videos" onClick={props.handleClick}>
             <img src={props.image} className="video-list__image" alt="a man looking left in front of a purple background"  />
             <div className="video-list__container">
                 <p className="video-list__title">{props.title}</p>
                 <p className="video-list__channel">{props.channel}</p>
             </div>
-        </section>
+        </button>
     )
 }

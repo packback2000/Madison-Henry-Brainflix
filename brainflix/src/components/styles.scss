@@ -13,6 +13,7 @@
 
 .main-video__description {
     padding: 0px;
+    list-style: none;
 }
 
 .main-video__description-box1 {
@@ -51,6 +52,7 @@ body {
 .comment-form {
     padding-left: 16px;
     padding-right: 16px;
+    display: flex;
 
     @media (min-width: 600px) {
         padding-left: 24px;
@@ -82,6 +84,7 @@ body {
             padding: 12px;
             margin-top: 4px;
             border: 1px solid $Mercury;
+            margin-bottom: 16px;
 
             @media (min-width: 600px) {
                 min-height: 40px;
@@ -130,8 +133,36 @@ body {
 .next-videos {
     display: flex;
     padding: 16px;
+    border: 0px;
+    background-color: $White;
+    width: 100%;
 
     @media (min-width: 600px) {
         padding: 24px;
+    }
+}
+
+video {
+    width: 100vw;
+}
+
+.comment-form__image {
+    border-radius: 100%;
+    max-width: 40px;
+    max-height: 40px;
+    margin-left: 16px;
+    width: 30%;
+    margin-top: 16px;
+}
+
+.comment-form__input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 16px;
+    min-width: 36px;
+   
+    @media (min-width: 600px){
+        display: block;
     }
 }

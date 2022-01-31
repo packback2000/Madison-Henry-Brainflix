@@ -20,6 +20,7 @@
 
 .main-video__description {
   padding: 0px;
+  list-style: none;
 }
 
 .main-video__description-box1 {
@@ -59,6 +60,7 @@ body {
 .comment-form {
   padding-left: 16px;
   padding-right: 16px;
+  display: flex;
 }
 @media (min-width: 600px) {
   .comment-form {
@@ -91,6 +93,7 @@ body {
   padding: 12px;
   margin-top: 4px;
   border: 1px solid #E1E1E1;
+  margin-bottom: 16px;
 }
 @media (min-width: 600px) {
   .comment-form .comment-form__input {
@@ -137,9 +140,38 @@ body {
 .next-videos {
   display: flex;
   padding: 16px;
+  border: 0px;
+  background-color: #FFFFFF;
+  width: 100%;
 }
 @media (min-width: 600px) {
   .next-videos {
     padding: 24px;
+  }
+}
+
+video {
+  width: 100vw;
+}
+
+.comment-form__image {
+  border-radius: 100%;
+  max-width: 40px;
+  max-height: 40px;
+  margin-left: 16px;
+  width: 30%;
+  margin-top: 16px;
+}
+
+.comment-form__input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 16px;
+  min-width: 36px;
+}
+@media (min-width: 600px) {
+  .comment-form__input-container {
+    display: block;
   }
 }/*# sourceMappingURL=styles.css.map */
