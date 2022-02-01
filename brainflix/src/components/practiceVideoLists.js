@@ -3,63 +3,44 @@ import videodetails from "../Assets/Data/video-details.json";
 import videos from "../Assets/Data/videos.json";
 import Mohan from "../Assets/Images/Mohan-muruge.jpg";
 import "./styles.css"
-import Views from "../Assets/Icons/views.svg";
-import Likes from "../Assets/Icons/likes.svg";
-import "./styles.css"
+/*
+import Scrubber from "../Assets/Icons/scrub.svg";
+import Play from "../Assets/Icons/play.svg";
+import Pause from "../Assets/Icons/pause.svg";
+import Fullscreen from "../Assets/Icons/fullscreen.svg";
+import CloseFullscreen from "../Assets/Icons/close_fullscreen.svg";
+import VolumeUp from "../Assets/Icons/volume_up.svg";
+import VolumeOff from "../Assets/Icons/volume_off.svg"
+*/
 
 class PracticeVideoList extends React.Component {
     constructor(props) {
         super(props);
-
-        //this state holds the api data
         this.state = {
-            videos,
-            videodetails
-        };
-        this.handleClick = this.handleClick.bind(this);
+            currentVideo: 0,
+            videos
+        }
         
+        this.handleClick = this.handleClick.bind(this);
     }
 
 
 
     //event handler that will get called onClick and provide the videodetails data
-    handleClick = (event) => {
-        event.preventDefault();
-        
-        console.log(event.target.id)
-        //onClick get the id of the video in the playlist and make the videodetails with the same id appear
-        //if videos.id === videodetails.id
-        //this.setState({
-        //    videodetails
-        //})
-
+    handleClick = () => {
+        console.log(this.state.videos.indexOf())
         this.setState({
-            
-        
+            currentVideo: this.state.currentVideo + 1
         });
-        
     }
 
     render() {
         return (
            <div>
 
-               <Player
-                key = {this.state.videodetails.id}
-                id = {this.state.videodetails.id}
-                title = {this.state.videodetails.title}
-                channel = {this.state.videodetails.channel}
-                image = {this.state.videodetails.image}
-                description = {this.state.videodetails.description}
-                views = {this.state.videodetails.views}
-                likes = {this.state.videodetails.likes}
-                duration = {this.state.videodetails.duration}
-                timestamp = {this.state.videodetails.timestamp}
-                comments = {this.state.videodetails[0].comments}
-                handleClick = {this.handleClick}
-                />
+                <Player currentVideoDetails = {videodetails[this.state.currentVideo]}/>
            
-
+                <p className="next-videos__label">Next Videos</p>
                {this.state.videos.map((video) =>
                 <VideoList 
                     key={video.id}
@@ -84,64 +65,77 @@ export default PracticeVideoList;
 
 function Player(props) {
 
-    const date = new Date(props.timestamp);
+    const date = new Date(props.currentVideoDetails.timestamp);
     const month = date.getUTCMonth() + 1;
     const day = date.getUTCDate();
     const year = date.getUTCFullYear();
     
     const fullDate = day + "/" + month + "/" + year;
 
+    console.log(props.currentVideoDetails.comments.timestamp)
+    const commentdate = new Date(props.currentVideoDetails.comments.timestamp);
+    const commentmonth = commentdate.getUTCMonth() + 1;
+    const commentday = commentdate.getUTCDate();
+    const commentyear = commentdate.getUTCFullYear();
+    
+    const commentfullDate = commentday + "/" + commentmonth + "/" + commentyear;
+   
     return(
-        <section className="main-video" key={props.id} id={props.id} onClick={props.handleClick}>
+        <section className="main-video" key={props.currentVideoDetails.id} id={props.currentVideoDetails.id}>
             <video
-                controls
-                poster={props.image}
+                
+                poster={props.currentVideoDetails.image}
                 className="main-video__video"
-                id={props.id}
+                id={props.currentVideoDetails.id}
 
             >
-                <source src={props.video} />
+                <source src={props.currentVideoDetails.video} />
             </video>
+         
 
             <div className="main-video__description-box">
-            <p className="main-video__description-title">{props.title}</p>
-                <ul key={props.id} className="main-video__description">
+            <p className="main-video__description-title">{props.currentVideoDetails.title}</p>
+            <hr/>
+                <ul key={props.currentVideoDetails.id} className="main-video__description">
                     <div className="main-video__description-box1">
-                        <li className="main-video__description-channel">{props.channel}</li>
+                        <li className="main-video__description-channel">{props.currentVideoDetails.channel}</li>
                         <li className="main-video__description-date">{fullDate}</li>
                     </div>
 
                     <div className="main-video__description-box2">
-                        <li className="main-video__description-views"><img src={Views} alt="an eye icon"/>{props.views}</li>
-                        <li className="main-video__description-likes"><img src={Likes} alt="a heart icon"/>{props.likes}</li>
+                        <li className="main-video__description-views">{props.currentVideoDetails.views}</li>
+                        <li className="main-video__description-likes">{props.currentVideoDetails.likes}</li>
                     </div>
                 </ul>
+                <hr/>
 
-                <p>{props.description}</p>
+                <p>{props.currentVideoDetails.description}</p>
             </div>
+            
             <div>
-                <p className="comments-number">{props.comments.length} Comments</p>
+            
+                <p className="comments-number">{props.currentVideoDetails.comments.length} Comments</p>
                 <form className='comment-form'>
                         <input type="image" className='comment-form__image' src={Mohan} alt="text" />
                         <div className='comment-form__input-container'>
                         <label>JOIN THE CONVERSATION</label>
                         <input type="text" className='comment-form__input'placeholder='Add a new comment'/>
-                        <button type='submit' className='comment-form__button' onClick={props.changeVideo}>Comment</button>
+                        <button type='submit' className='comment-form__button' onClick={props.currentVideoDetails.changeVideo}>Comment</button>
                         </div>
                 </form>
              </div>
                 <br />
                 
-            <p className="comments-comments">{props.comments.map((comments) =>
+            <p className="comments-comments">{props.currentVideoDetails.comments.map((comments) =>
             <ul className="comments-list">
             <hr />
 
                 <div className="comment-list-column1">
-                <li className="comments-list__avatar"><img src={props.image}></img></li>
+                <li className="comments-list__avatar"></li>
                 </div>
                 <div className="comments-list__line1">
                 <li className="comments-list__name">{comments.name}</li>
-                <li className="comments-list__timestamp">{comments.timestamp}</li>
+                <li className="comments-list__timestamp">{commentfullDate}</li>
                 </div>
             <div>
                 <li className="comments-list__comment">{comments.comment}</li>
@@ -164,5 +158,40 @@ function VideoList(props) {
                 <p className="video-list__channel" id={props.id}>{props.channel}</p>
             </div>
         </section>
+
     )
 }
+
+/*
+<div>
+            
+                <p className="comments-number">{props.comments.length} Comments</p>
+                <form className='comment-form'>
+                        <input type="image" className='comment-form__image' src={Mohan} alt="text" />
+                        <div className='comment-form__input-container'>
+                        <label>JOIN THE CONVERSATION</label>
+                        <input type="text" className='comment-form__input'placeholder='Add a new comment'/>
+                        <button type='submit' className='comment-form__button' onClick={props.changeVideo}>Comment</button>
+                        </div>
+                </form>
+             </div>
+                <br />
+                
+            <p className="comments-comments">{props.comments.map((comments) =>
+            <ul className="comments-list">
+            <hr />
+
+                <div className="comment-list-column1">
+                <li className="comments-list__avatar"></li>
+                </div>
+                <div className="comments-list__line1">
+                <li className="comments-list__name">{comments.name}</li>
+                <li className="comments-list__timestamp">{fullDate}</li>
+                </div>
+            <div>
+                <li className="comments-list__comment">{comments.comment}</li>
+            </div>
+            
+            </ul>)}</p>
+            <hr />
+*/
