@@ -14,6 +14,7 @@
 .main-video__description {
     padding: 0px;
     list-style: none;
+    display: flex;
 }
 
 .main-video__description-box1 {
@@ -65,6 +66,7 @@ body {
         border-radius: 4px;
         background-color: $BrainFlix-Blue;
         display: flex;
+        @include MobileLabelsandButtons;
         
         @media (min-width: 600px) {
             min-width: 150px;
@@ -74,6 +76,8 @@ body {
     }
     button:hover {
         background-color: $BrainFlix-DarkBlue;
+        color: $White;
+        @include MobileLabelsandButtons;
     }
 
     .comment-form__input {
@@ -85,11 +89,23 @@ body {
             margin-top: 4px;
             border: 1px solid $Mercury;
             margin-bottom: 16px;
+            width: 90%;
 
             @media (min-width: 600px) {
                 min-height: 40px;
                 padding: 16px;
             }
+        }
+
+        .comment-form__button {
+            border: 0px;
+            color: $White;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url(../Assets/Icons/add_comment.svg);
+            background-repeat: no-repeat;
+            background-position: 10%;
         }
 
     
@@ -128,6 +144,7 @@ body {
     padding-left: 16px;
     flex-direction: column;
     flex-wrap: wrap;
+    width: 1000%;
 }
 
 .next-videos {
@@ -135,7 +152,7 @@ body {
     padding: 16px;
     border: 0px;
     background-color: $White;
-    width: 100%;
+
 
     @media (min-width: 600px) {
         padding: 24px;
@@ -161,8 +178,118 @@ video {
     align-items: center;
     margin-left: 16px;
     min-width: 36px;
+    width: 80%;
+
+    label {
+        @include MobileLabelsandButtons;
+        color: $Silver;
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+    }
    
     @media (min-width: 600px){
         display: block;
     }
+}
+
+.comments-comments {
+    padding: 0px 16px;
+}
+.comments-list__avatar {
+    background-color: $Mercury;
+    border-radius: 100%;
+    max-width: 40px;
+    max-height: 40px;
+    margin-left: 16px;
+}
+
+.comments-list {
+    padding: 0px;
+    font-family: AvenirNextRegular;
+    list-style: none;
+
+    hr {
+        border: 1px solid $Mercury;
+    }
+    
+    
+    .comments-list__line1 {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .comments-list__name {
+        font-family: AvenirNextBold;
+    }
+}
+
+hr {
+    border: 1px solid $Mercury;
+}
+
+.Header {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .logo {
+        padding: 16px;
+    }
+
+    .header-form {
+        width: 100%;
+    }
+    
+
+
+.header-form__button {
+    width: 100%;
+    height: 40px;
+    min-width: 100%;
+    border-radius: 4px;
+    background-color: #0095FF;
+    color: #FFFFFF;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 700;
+    border: none;
+    @include MobileLabelsandButtons;
+    background-image: url(../Assets/Icons/upload.svg);
+    background-repeat: no-repeat;
+    background-position: 10%;
+}
+
+.header-form__image {
+    border-radius: 100%;
+    max-width: 40px;
+    max-height: 40px;
+    margin-left: 16px;
+    
+}
+
+.header-input__container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.header-form__input {
+    width: 100%;
+    background-image: url("../Assets/Icons/search.svg");
+    background-repeat: no-repeat;
+    background-position: 3%;
+    text-indent: 20px;
+    padding: 8px;
+    border: 1px solid $Mercury;
+}
+
+.header-form__input:active {
+    border: 2px solid $BrainFlix-Blue;
+}
+
+
 }

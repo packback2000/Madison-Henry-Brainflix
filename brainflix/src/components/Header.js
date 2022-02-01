@@ -1,9 +1,7 @@
 import React from 'react';
 import Logo from "../Assets/Logo/BrainFlix-logo.svg"
-import "./Header.css"
 import Mohan from "../Assets/Images/Mohan-muruge.jpg"
-import Upload from "../Assets/Icons/upload.svg"
-
+import "./styles.css"
 
 
 class Comments extends React.Component {
@@ -36,7 +34,7 @@ class Comments extends React.Component {
                     
                     <input type="image" className='header-form__image' src={Mohan} alt='Mohan' />
                     </div>
-                    <button type='submit' className='header-form__button'><img src={Upload} alt="upload icon"></img>Upload</button>
+                    <button type='submit' className='header-form__button'>Upload</button>
                 </form>
             </section>
         )
