@@ -35,6 +35,7 @@ class Comments extends React.Component {
                     <input type="image" className='header-form__image' src={Mohan} alt='Mohan' />
                     </div>
                     <button type='submit' className='header-form__button'>Upload</button>
+                    <input type="image" className='mohan-over480' src={Mohan} alt="text" />
                 </form>
             </section>
         )
