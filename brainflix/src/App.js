@@ -1,6 +1,6 @@
 import Header from './components/Header';
 import React from 'react';
-import PracticeVideoList from './components/practiceVideoLists';
+import Videos from './components/Videos';
 
 
 
@@ -11,7 +11,7 @@ function App() {
 
       <Header />
 
-      <PracticeVideoList />
+      <Videos />
 
     </div>
   );

@@ -8,7 +8,7 @@ import Play from "../Assets/Icons/play.svg";
 import Fullscreen from "../Assets/Icons/fullscreen.svg";
 import VolumeUp from "../Assets/Icons/volume_up.svg";
 
-class PracticeVideoList extends React.Component {
+class Videos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,7 +50,7 @@ class PracticeVideoList extends React.Component {
     }
 }
 
-export default PracticeVideoList;
+export default Videos;
 
 
 function Player(props) {
