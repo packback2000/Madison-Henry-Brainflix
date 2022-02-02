@@ -19,9 +19,12 @@ class PracticeVideoList extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick = (e) => {
+    handleClick = (e, itemid) => {
+        console.log(e.target.id)
+        console.log(this.state.videos.id)
         this.setState({
-            currentVideo: this.state.currentVideo + 1
+        //    currentVideo: this.state.currentVideo + 1,
+        //    videos: this.state.videos.filter(e => e !== e.target.id)
         });
     }
 
