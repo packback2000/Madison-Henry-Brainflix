@@ -1,6 +1,6 @@
 import React from "react";
-import videodetails from "../Assets/Data/video-details.json";
-import videos from "../Assets/Data/videos.json";
+import videodetails from "../Data/video-details.json";
+import videos from "../Data/videos.json";
 import Mohan from "../Assets/Images/Mohan-muruge.jpg";
 import "./styles.css";
 import Scrubber from "../Assets/Icons/scrub.svg";
@@ -19,19 +19,10 @@ class Videos extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick = (itemID) => {
-        const updatedVideo = this.state.videos.map(video => {
-            if (video.id === itemID) {
-                video.id = ! video.id
-            }
-            return video;
+    handleClick = () => {
+        this.setState({
+            currentVideo: this.state.currentVideo + 1
         })
-        console.log(updatedVideo)
-        
-    //    this.setState({
-    //        currentVideo: updatedVideo
-        
-    //    });
     }
 
     render() {
