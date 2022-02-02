@@ -19,13 +19,19 @@ class Videos extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick = (e, itemid) => {
-        console.log(e.target.id)
-        console.log(this.state.videos.id)
-        this.setState({
-            currentVideo: this.state.currentVideo + 1,
-        //    videos: this.state.videos.filter(e => e !== e.target.id)
-        });
+    handleClick = (itemID) => {
+        const updatedVideo = this.state.videos.map(video => {
+            if (video.id === itemID) {
+                video.id = ! video.id
+            }
+            return video;
+        })
+        console.log(updatedVideo)
+        
+    //    this.setState({
+    //        currentVideo: updatedVideo
+        
+    //    });
     }
 
     render() {
