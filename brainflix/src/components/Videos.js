@@ -20,16 +20,15 @@ class Videos extends React.Component {
     }
 
     handleClick = (id) => {
-        console.log(id)
-        console.log(videodetails[this.state.currentVideo].id)
-        let videoIndex = this.state.videos.map(function(x) {return x.id;}).indexOf(id)
-        console.log(videoIndex)
+        let videoIndex = this.state.videos.map(function(x) {return x.id;}).indexOf(id);
 
         this.setState({
-           currentVideo: videoIndex
-        })
-
+           currentVideo: videoIndex,
+          // videos: this.state.videos.filter(this.state.currentVideo.id)
+        }) 
     }
+
+
 
     render() {
         return (
@@ -58,12 +57,15 @@ export default Videos;
 
 function Player(props) {
 
-    const date = new Date(props.currentVideoDetails.timestamp);
-    const month = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
-    const year = date.getUTCFullYear();
-    
-    const fullDate = day + "/" + month + "/" + year;
+
+    const formatMyDate = (timestamp) => {
+        const date = new Date(timestamp)
+        let month = date.getUTCMonth() + 1;
+        let day = date.getUTCDate();
+        const year = date.getUTCFullYear();
+        const formattedDate = day + "/" + month + "/" + year;
+        return formattedDate;
+    }
 
     return(
         <section className="main-video" key={props.currentVideoDetails.id} id={props.currentVideoDetails.id}>
@@ -96,7 +98,7 @@ function Player(props) {
                 <ul key={props.currentVideoDetails.id} className="main-video__description">
                     <div className="main-video__description-box1">
                         <li className="main-video__description-channel">{props.currentVideoDetails.channel}</li>
-                        <li className="main-video__description-date">date</li>
+                        <li className="main-video__description-date">{formatMyDate(props.currentVideoDetails.timestamp)}</li>
                     </div>
 
                     <div className="main-video__description-box2">
@@ -124,25 +126,23 @@ function Player(props) {
              </div>
 
              <p className="comments-comments">{props.currentVideoDetails.comments.map((comments) =>
-            <ul className="comments-list">
-            <hr />
-                <div className="comment-list-column1">
-                <li className="comments-list__avatar"></li>
-                </div>
-                
-                <div className="comments-list__line1">
-                <li className="comments-list__name">{comments.name}</li>
-                <li className="comments-list__timestamp">{comments.timestamp}</li>
-                </div>
+                <div className="comments-list">
+                    <ul className="comment-list__one">
+                        <li className="comments-list__avatar"><img src="" alt=""></img></li>
+                    </ul>
+                    <ul className="comment-list__two">
+                        <div className="comments-list__line1">
+                        <li className="comments-list__name">{comments.name}</li>
+                        <li className="comments-list__timestamp">{formatMyDate(comments.timestamp)}</li>
+                        </div>
+                        <div>
+                            <li className="comments-list__comment">{comments.comment}</li>
+                        </div>
+                    </ul>
             
-            <div>
-                <li className="comments-list__comment">{comments.comment}</li>
-            </div>
-            
-            </ul>)}</p>
-            <hr />
-           
-        </section>
+                </div>)}</p>
+                <hr />
+           </section>
     )
 }
   
