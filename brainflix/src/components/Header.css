@@ -1,0 +1,39 @@
+.Header {
+    padding: 16px;
+}
+
+.header-form__button {
+    width: 100%;
+    height: 40px;
+    min-width: 100%;
+    border-radius: 4px;
+    background-color: #0095FF;
+    color: #FFFFFF;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: 700;
+    border: none;
+}
+
+.header-form__image {
+    border-radius: 100%;
+    max-width: 40px;
+    max-height: 40px;
+    margin-left: 16px;
+}
+
+.header-input__container {
+    display: flex;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.header-form__input {
+    width: 80%;
+    background-image: url("../Assets/Icons/search.svg");
+    background-repeat: no-repeat;
+    text-indent: 20px;
+    padding: 8px;
+}
