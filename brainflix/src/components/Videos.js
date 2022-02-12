@@ -1,34 +1,71 @@
 import React from "react";
 import videodetails from "../Data/video-details.json";
-import videos from "../Data/videos.json";
-import Mohan from "../Assets/Images/Mohan-muruge.jpg";
 import "./styles.css";
-import Scrubber from "../Assets/Icons/scrub.svg";
-import Play from "../Assets/Icons/play.svg";
-import Fullscreen from "../Assets/Icons/fullscreen.svg";
-import VolumeUp from "../Assets/Icons/volume_up.svg";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Player from "./MainVideo";
+import VideoList from "./VideoDetails";
+
+// const apiKey = "427f0887-9b87-4dad-a425-2d49ecd8c162";
 
 class Videos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: [],
             currentVideo: 0,
-            videos
+            videoDetails: []
         }
-        
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick = (id) => {
-        let videoIndex = this.state.videos.map(function(x) {return x.id;}).indexOf(id);
-
-        this.setState({
-           currentVideo: videoIndex,
-          // videos: this.state.videos.filter(this.state.currentVideo.id)
-        }) 
+    fetchVideoDetails() {
+        axios.get("https://project-2-api.herokuapp.com/videos/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
+        .then(response => {
+            const apiData = response.data
+            this.setState({
+                data: apiData
+            }) 
+        })
     }
 
+    componentDidMount() {
+        this.fetchVideoDetails()
+    }
+    
+    componentDidUpdate(prevProps, prevState) {
+        if (this.props.match.params.id === this.state.data.id) {
+           console.log("id matches")
+        }
+    }
+    
+    handleDelete = (id) => {
+        const updatedList =  this.state.data.filter((todoitem) => {
+            return id !== todoitem.id;
+        })
+        this.setState({data: updatedList})
+    }
 
+    handleClick = (id) => {
+        let videoIndex = this.state.data.map(function(x) {return x.id;}).indexOf(id);
+        this.setState({
+           currentVideo: videoIndex,
+        }); 
+        
+        let details = axios.get("https://project-2-api.herokuapp.com/videos/" + this.state.data[videoIndex].id + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
+        .then(response => {
+           let profile = response.data;
+           console.log(profile)
+           this.setState({
+               videoDetails: profile
+           });
+       }).catch(err => {
+           console.log(err);
+       })
+       console.log(this.state.videoDetails)
+       console.log(details)
+       };
+       
 
     render() {
         return (
@@ -37,7 +74,8 @@ class Videos extends React.Component {
                 <Player currentVideoDetails = {videodetails[this.state.currentVideo]}/>
            
                 <p className="next-videos__label">Next Videos</p>
-               {this.state.videos.map((video) =>
+               {this.state.data.map((video) =>
+               <Link to={"/videos/" + video.id} key={video.id}>
                 <VideoList 
                     key={video.id}
                     id = {video.id}
@@ -45,7 +83,10 @@ class Videos extends React.Component {
                     image={video.image}
                     channel={video.channel}
                     handleClick = {this.handleClick}
+                    handleDelete = {this.handleDelete}
+                    video = {video.video}
                 />
+                </Link>
                )} 
            </div>
         )
@@ -53,110 +94,3 @@ class Videos extends React.Component {
 }
 
 export default Videos;
-
-
-function Player(props) {
-
-
-    const formatMyDate = (timestamp) => {
-        const date = new Date(timestamp)
-        let month = date.getUTCMonth() + 1;
-        let day = date.getUTCDate();
-        const year = date.getUTCFullYear();
-        const formattedDate = day + "/" + month + "/" + year;
-        return formattedDate;
-    }
-
-    return(
-        <section className="main-video" key={props.currentVideoDetails.id} id={props.currentVideoDetails.id}>
-            <div className="video-container">
-            <video
-                
-                poster={props.currentVideoDetails.image}
-                className="main-video__video"
-                id={props.currentVideoDetails.id}
-            >
-                <source src={props.currentVideoDetails.video} />
-            </video>
-            </div>
-
-            <div id="video-controls" class="controls" data-state="hidden">
-                <button id="playpause" type="button" data-state="play"><img src={Play} alt="play"/></button>
-                
-                <div class="progress">
-                    <progress id="progress" value="0" min="0">
-                        <span id="progress-bar"><img src={Scrubber} alt="scrubber"/><p>{props.currentVideoDetails.duration}</p></span>
-                    </progress>
-                </div>
-                <button id="volinc" type="button" data-state="volup"><img src={VolumeUp} alt="volueup"/></button>
-                <button id="fs" type="button" data-state="go-fullscreen"><img src={Fullscreen} alt="fullscreen"/></button>
-            </div>
-
-            <div className="main-video__description-box">
-            <p className="main-video__description-title">{props.currentVideoDetails.title}</p>
-            <hr/>
-                <ul key={props.currentVideoDetails.id} className="main-video__description">
-                    <div className="main-video__description-box1">
-                        <li className="main-video__description-channel">{props.currentVideoDetails.channel}</li>
-                        <li className="main-video__description-date">{formatMyDate(props.currentVideoDetails.timestamp)}</li>
-                    </div>
-
-                    <div className="main-video__description-box2">
-                        <li className="main-video__description-views">{props.currentVideoDetails.views}</li>
-                        <li className="main-video__description-likes">{props.currentVideoDetails.likes}</li>
-                    </div>
-                </ul>
-                <hr/>
-
-                <p>{props.currentVideoDetails.description}</p>
-            </div>
-            
-            <div>
-                <p className="comments-number">{props.currentVideoDetails.comments.length} Comments</p>
-                <form className='comment-form'>
-            
-                        <input type="image" className='comment-form__image' src={Mohan} alt="text" />
-                        <div className='comment-form__input-container'>
-                        <label className="under480">JOIN THE CONVERSATION
-                        <input type="text" className='comment-form__input'placeholder='Add a new comment'/>
-                        </label>
-                        <button type='submit' className='comment-form__button' onClick={props.currentVideoDetails.changeVideo}>Comment</button>
-                        </div>
-                </form>
-             </div>
-
-             <p className="comments-comments">{props.currentVideoDetails.comments.map((comments) =>
-                <div className="comments-list">
-                    <ul className="comment-list__one">
-                        <li className="comments-list__avatar"><img src="" alt=""></img></li>
-                    </ul>
-                    <ul className="comment-list__two">
-                        <div className="comments-list__line1">
-                        <li className="comments-list__name">{comments.name}</li>
-                        <li className="comments-list__timestamp">{formatMyDate(comments.timestamp)}</li>
-                        </div>
-                        <div>
-                            <li className="comments-list__comment">{comments.comment}</li>
-                        </div>
-                    </ul>
-            
-                </div>)}</p>
-                <hr />
-           </section>
-    )
-}
-  
-function VideoList(props) {
-    
-    return (
-        <section className="next-videos" onClick={() => props.handleClick(props.id)} key={props.id} id={props.id}>
-            <img id={props.id} src={props.image} className="video-list__image" alt="a man looking left in front of a purple background"  />
-            <div className="video-list__container" id={props.id}>
-                <p className="video-list__title" id={props.id}>{props.title}</p>
-                <p className="video-list__channel" id={props.id}>{props.channel}</p>
-            </div>
-        </section>
-
-    )
-}
-
