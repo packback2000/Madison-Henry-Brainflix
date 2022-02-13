@@ -53,6 +53,7 @@ class Videos extends React.Component {
         }); 
         
         let details = axios.get("https://project-2-api.herokuapp.com/videos/" + this.state.data[videoIndex].id + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
+        
         .then(response => {
            let profile = response.data;
            console.log(profile)
@@ -62,16 +63,16 @@ class Videos extends React.Component {
        }).catch(err => {
            console.log(err);
        })
-       console.log(this.state.videoDetails)
-       console.log(details)
        };
        
+    
 
     render() {
+       
         return (
            <div>
 
-                <Player currentVideoDetails = {videodetails[this.state.currentVideo]}/>
+                <Player currentVideoDetails = {this.state.videoDetails}/>
            
                 <p className="next-videos__label">Next Videos</p>
                {this.state.data.map((video) =>

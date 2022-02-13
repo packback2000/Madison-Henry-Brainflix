@@ -24,7 +24,6 @@ function App() {
             )
             }}
           />
-          <Route path="/404" component={page404} />
           <Route path="/uploads" component={uploadPage} />
         </Switch>
       </BrowserRouter>

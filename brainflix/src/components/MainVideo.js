@@ -8,6 +8,8 @@ import VolumeUp from "../Assets/Icons/volume_up.svg";
 
 function Player(props) {
 
+
+
     const formatMyDate = (timestamp) => {
         const date = new Date(timestamp)
         let month = date.getUTCMonth() + 1;
@@ -17,6 +19,7 @@ function Player(props) {
         return formattedDate;
     }
 
+    console.log(props.currentVideoDetails.comments)
     return(
         <section className="main-video" key={props.currentVideoDetails.id} id={props.currentVideoDetails.id}>
             <div className="video-container">
@@ -63,7 +66,7 @@ function Player(props) {
             </div>
             
             <div>
-                <p className="comments-number">{props.currentVideoDetails.comments.length} Comments</p>
+                <p className="comments-number">Comments</p>
                 <form className='comment-form'>
             
                         <input type="image" className='comment-form__image' src={Mohan} alt="text" />
@@ -76,7 +79,7 @@ function Player(props) {
                 </form>
              </div>
 
-             <p className="comments-comments">{props.currentVideoDetails.comments.map((comments) =>
+             <p className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
                 <div className="comments-list">
                     <ul className="comment-list__one">
                         <li className="comments-list__avatar"><img src="" alt=""></img></li>
@@ -91,7 +94,7 @@ function Player(props) {
                         </div>
                     </ul>
             
-                </div>)}</p>
+                </div>): <div>Comments Loading</div>}</p>
                 <hr />
            </section>
     )
