@@ -1,44 +1,99 @@
 import React from "react";
-import videodetails from "../Data/video-details.json";
 import "./styles.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import Player from "./MainVideo";
-import VideoList from "./VideoDetails";
+import Player from "./Player.js";
+import { _success, _info, _warning, _error } from 'react-color-log';
+import Video from "./Video";
+import { API_URL } from "../App";
 
 // const apiKey = "427f0887-9b87-4dad-a425-2d49ecd8c162";
+
 
 class Videos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            currentVideo: 0,
-            videoDetails: []
+            currentVideo: {},
+            videoDetails: [],
+            comment: "",
+            image: "",
+            title: "",
+            id: "",
+            channel: "",
         }
-        this.handleClick = this.handleClick.bind(this);
     }
 
+  
     fetchVideoDetails() {
-        axios.get("https://project-2-api.herokuapp.com/videos/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
-        .then(response => {
-            const apiData = response.data
+        const apiURL = `${API_URL}`
+        axios.get(apiURL)
+        .then((response) => {
+            const apiData = response.data;
             this.setState({
-                data: apiData
-            }) 
+               data: apiData,
+               title: apiData.channel,
+               id: apiData.id,
+               channel: apiData.channel,
+               image: apiData.image
+            })
         })
     }
 
+    
+
     componentDidMount() {
-        this.fetchVideoDetails()
+        this.fetchVideoDetails();
+        let videoidentification = this.props.match.params.videoID
+        axios.get("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
+        .then(response => {
+            let mainvideoData = response.data
+            this.setState({
+                currentVideo: mainvideoData,
+            })
+        })
     }
     
     componentDidUpdate(prevProps, prevState) {
-        if (this.props.match.params.id === this.state.data.id) {
-           console.log("id matches")
-        }
+       if (prevState.currentVideo.id !== this.props.match.params.videoID) {
+        console.log("componentDidUpdate")
+       }
     }
-    
+
+    componentWillUnmount() {
+        console.log('componentWillUnmount');
+      }
+ 
+    render() {
+
+        return (
+           <div>
+             <Player currentVideoDetails = {this.state.currentVideo}/>
+           
+                <p className="next-videos__label">Next Videos</p>
+               {this.state.data.map((video) =>
+               <div key={video.id} className="Videos__item">
+                <Video
+                    key={video.id}
+                    id = {video.id}
+                    title={video.title}
+                    image={video.image}
+                    channel={video.channel}
+                    handleClick = {this.handleClick}
+                    handleDelete = {this.handleDelete}
+                    video = {video.video}
+                    handleSubmit = {this.handleSubmit}
+                />
+                 </div>
+               )} 
+           </div>
+        )
+    }
+}
+
+export default Videos;
+
+   /*
     handleDelete = (id) => {
         const updatedList =  this.state.data.filter((todoitem) => {
             return id !== todoitem.id;
@@ -52,46 +107,43 @@ class Videos extends React.Component {
            currentVideo: videoIndex,
         }); 
         
-        let details = axios.get("https://project-2-api.herokuapp.com/videos/" + this.state.data[videoIndex].id + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
-        
+        axios.get("https://project-2-api.herokuapp.com/videos/" + this.state.data[videoIndex].id + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
         .then(response => {
            let profile = response.data;
-           console.log(profile)
            this.setState({
-               videoDetails: profile
+               videoDetails: 
+               
+
            });
        }).catch(err => {
            console.log(err);
        })
-       };
-       
-    
+    };
 
-    render() {
-       
-        return (
-           <div>
+    handleSubmit = (id, event) => {
 
-                <Player currentVideoDetails = {this.state.videoDetails}/>
-           
-                <p className="next-videos__label">Next Videos</p>
-               {this.state.data.map((video) =>
-               <Link to={"/videos/" + video.id} key={video.id}>
-                <VideoList 
-                    key={video.id}
-                    id = {video.id}
-                    title={video.title}
-                    image={video.image}
-                    channel={video.channel}
-                    handleClick = {this.handleClick}
-                    handleDelete = {this.handleDelete}
-                    video = {video.video}
-                />
-                </Link>
-               )} 
-           </div>
-        )
+        let videoIndex = this.state.data.map(function(x) {return x.id;}).indexOf(id);
+        this.setState({
+           currentVideo: videoIndex,
+        });
+
+        axios.post("https://project-2-api.herokuapp.com/videos/" + this.state.data[videoIndex].id + "/comments/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162", {
+            comment: this.state.comment,
+            image: this.state.image
+        })
+        .then(response => {
+            console.log(response)
+
+        })
     }
-}
+*/
 
-export default Videos;
+/*
+    CONST vIDEOS = (PROPS) => {
+        const newVideoArray = props.video.filter((video, index) => {
+            console.log(video.id, props.currentVideo);
+            return video.id !== props.currentVideo;
+        })
+    }
+    return newVideoArray.map((video, index))
+*/

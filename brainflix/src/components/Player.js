@@ -8,8 +8,6 @@ import VolumeUp from "../Assets/Icons/volume_up.svg";
 
 function Player(props) {
 
-
-
     const formatMyDate = (timestamp) => {
         const date = new Date(timestamp)
         let month = date.getUTCMonth() + 1;
@@ -18,8 +16,7 @@ function Player(props) {
         const formattedDate = day + "/" + month + "/" + year;
         return formattedDate;
     }
-
-    console.log(props.currentVideoDetails.comments)
+    
     return(
         <section className="main-video" key={props.currentVideoDetails.id} id={props.currentVideoDetails.id}>
             <div className="video-container">
@@ -37,7 +34,7 @@ function Player(props) {
             <div id="video-controls" className="controls" data-state="hidden">
                 <button id="playpause" type="button" data-state="play"><img src={Play} alt="play"/></button>
                 
-                <div class="progress">
+                <div className="progress">
                     <progress id="progress" value="0" min="0">
                         <span id="progress-bar"><img src={Scrubber} alt="scrubber"/><p>{props.currentVideoDetails.duration}</p></span>
                     </progress>
@@ -67,24 +64,24 @@ function Player(props) {
             
             <div>
                 <p className="comments-number">Comments</p>
-                <form className='comment-form'>
+                <form className='comment-form' onSubmit={props.handleSubmit}>
             
-                        <input type="image" className='comment-form__image' src={Mohan} alt="text" />
+                        <input type="image" className='comment-form__image' src={Mohan} alt="text" value={props.image} />
                         <div className='comment-form__input-container'>
                         <label className="under480">JOIN THE CONVERSATION
-                        <input type="text" className='comment-form__input'placeholder='Add a new comment'/>
+                        <input type="text" className='comment-form__input'placeholder='Add a new comment' value={props.text} />
                         </label>
                         <button type='submit' className='comment-form__button' onClick={props.currentVideoDetails.changeVideo}>Comment</button>
                         </div>
                 </form>
              </div>
 
-             <p className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
+             <div className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
                 <div className="comments-list">
-                    <ul className="comment-list__one">
+                    <ul className="comment-list__one" key={props.id}>
                         <li className="comments-list__avatar"><img src="" alt=""></img></li>
                     </ul>
-                    <ul className="comment-list__two">
+                    <ul className="comment-list__two" key={props.id}>
                         <div className="comments-list__line1">
                         <li className="comments-list__name">{comments.name}</li>
                         <li className="comments-list__timestamp">{formatMyDate(comments.timestamp)}</li>
@@ -94,7 +91,7 @@ function Player(props) {
                         </div>
                     </ul>
             
-                </div>): <div>Comments Loading</div>}</p>
+                </div>): <div>Comments Loading</div>}</div>
                 <hr />
            </section>
     )
