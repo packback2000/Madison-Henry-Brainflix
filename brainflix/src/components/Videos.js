@@ -2,7 +2,6 @@ import React from "react";
 import "./styles.css";
 import axios from "axios";
 import Player from "./Player.js";
-import { _success, _info, _warning, _error } from 'react-color-log';
 import Video from "./Video";
 import { API_URL } from "../App";
 
@@ -73,17 +72,17 @@ class Videos extends React.Component {
                 <p className="next-videos__label">Next Videos</p>
                {this.state.data.map((video) =>
                <div key={video.id} className="Videos__item">
-                <Video
-                    key={video.id}
-                    id = {video.id}
-                    title={video.title}
-                    image={video.image}
-                    channel={video.channel}
-                    handleClick = {this.handleClick}
-                    handleDelete = {this.handleDelete}
-                    video = {video.video}
-                    handleSubmit = {this.handleSubmit}
-                />
+                    <Video
+                        key={video.id}
+                        id = {video.id}
+                        title={video.title}
+                        image={video.image}
+                        channel={video.channel}
+                        handleClick = {this.handleClick}
+                        handleDelete = {this.handleDelete}
+                        video = {video.video}
+                        handleSubmit = {this.handleSubmit}
+                    />
                  </div>
                )} 
            </div>
@@ -92,51 +91,6 @@ class Videos extends React.Component {
 }
 
 export default Videos;
-
-   /*
-    handleDelete = (id) => {
-        const updatedList =  this.state.data.filter((todoitem) => {
-            return id !== todoitem.id;
-        })
-        this.setState({data: updatedList})
-    }
-
-    handleClick = (id) => {
-        let videoIndex = this.state.data.map(function(x) {return x.id;}).indexOf(id);
-        this.setState({
-           currentVideo: videoIndex,
-        }); 
-        
-        axios.get("https://project-2-api.herokuapp.com/videos/" + this.state.data[videoIndex].id + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
-        .then(response => {
-           let profile = response.data;
-           this.setState({
-               videoDetails: 
-               
-
-           });
-       }).catch(err => {
-           console.log(err);
-       })
-    };
-
-    handleSubmit = (id, event) => {
-
-        let videoIndex = this.state.data.map(function(x) {return x.id;}).indexOf(id);
-        this.setState({
-           currentVideo: videoIndex,
-        });
-
-        axios.post("https://project-2-api.herokuapp.com/videos/" + this.state.data[videoIndex].id + "/comments/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162", {
-            comment: this.state.comment,
-            image: this.state.image
-        })
-        .then(response => {
-            console.log(response)
-
-        })
-    }
-*/
 
 /*
     CONST vIDEOS = (PROPS) => {

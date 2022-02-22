@@ -27,7 +27,7 @@ class Comments extends React.Component {
     render() {
         return(
             <section className='Header'>
-                <Link to={"/videos"}>
+                <Link to={"/videos/84e96018-4022-434e-80bf-000ce4cd12b8"}>
                     <img src={Logo} className='logo' alt="Brainflix logo" />
                 </Link>
 
