@@ -5,6 +5,8 @@ import Scrubber from "../Assets/Icons/scrub.svg";
 import Play from "../Assets/Icons/play.svg";
 import Fullscreen from "../Assets/Icons/fullscreen.svg";
 import VolumeUp from "../Assets/Icons/volume_up.svg";
+import Comment from "../Assets/Icons/add_comment.svg";
+
 
 function Player(props) {
 
@@ -31,19 +33,8 @@ function Player(props) {
             </video>
             </div>
 
-            <div id="video-controls" className="controls" data-state="hidden">
-                <button id="playpause" type="button" data-state="play"><img src={Play} alt="play"/></button>
-                
-                <div className="progress">
-                    <progress id="progress" value="0" min="0">
-                        <span id="progress-bar"><img src={Scrubber} alt="scrubber"/><p>{props.currentVideoDetails.duration}</p></span>
-                    </progress>
-                </div>
-                <button id="volinc" type="button" data-state="volup"><img src={VolumeUp} alt="volueup"/></button>
-                <button id="fs" type="button" data-state="go-fullscreen"><img src={Fullscreen} alt="fullscreen"/></button>
-            </div>
-
-            <div className="main-video__description-box">
+            <div className="main-video__details">
+            <section className="main-video__description-box">
             <p className="main-video__description-title">{props.currentVideoDetails.title}</p>
             <hr/>
                 <ul key={props.currentVideoDetails.id} className="main-video__description">
@@ -60,9 +51,10 @@ function Player(props) {
                 <hr/>
 
                 <p>{props.currentVideoDetails.description}</p>
-            </div>
+            </section>
+
             
-            <div>
+            <section className="comments-section">
                 <p className="comments-number">Comments</p>
                 <form className='comment-form' onSubmit={props.handleSubmit}>
             
@@ -71,11 +63,12 @@ function Player(props) {
                         <label className="under480">JOIN THE CONVERSATION
                         <input type="text" className='comment-form__input'placeholder='Add a new comment' value={props.text} />
                         </label>
-                        <button type='submit' className='comment-form__button' onClick={props.currentVideoDetails.changeVideo}>Comment</button>
+                        <div className="comment-form__button-container">
+                            <button type='submit' className='comment-form__button' onClick={props.currentVideoDetails.changeVideo}><img src={Comment} alt="Comment"/><p>Comment</p></button>
+                        </div>
                         </div>
                 </form>
-             </div>
-
+             
              <div className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
                 <div className="comments-list">
                     <ul className="comment-list__one" key={props.id}>
@@ -92,8 +85,25 @@ function Player(props) {
                     </ul>
             
                 </div>): <div>Comments Loading</div>}</div>
+                </section>
+                </div>
+
                 <hr />
            </section>
     )
 }
 export default Player;
+
+/*
+ <div id="video-controls" className="controls" data-state="hidden">
+                <button id="playpause" type="button" data-state="play"><img src={Play} alt="play"/></button>
+                
+                <div className="progress">
+                    <progress id="progress" value="0" min="0">
+                        <span id="progress-bar"><img src={Scrubber} alt="scrubber"/><p>{props.currentVideoDetails.duration}</p></span>
+                    </progress>
+                </div>
+                <button id="volinc" type="button" data-state="volup"><img src={VolumeUp} alt="volueup"/></button>
+                <button id="fs" type="button" data-state="go-fullscreen"><img src={Fullscreen} alt="fullscreen"/></button>
+            </div>
+*/

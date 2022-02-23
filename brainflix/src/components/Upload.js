@@ -1,9 +1,7 @@
 import VideoPreview from "../Assets/Images/Upload-video-preview.jpg";
 import React from "react";
-import { Link } from "react-router-dom";
 import "./styles.css";
 import publishButton from "../Assets/Icons/publish.svg";
-import { Redirect } from "react-router-dom";
 
 class uploadPage extends React.Component {
     state = {
@@ -41,27 +39,38 @@ class uploadPage extends React.Component {
     render() {
         
         return(
-            <section className="uploads" onSubmit={this.handleUpload}>
+            <section className="uploads" >
                 <hr></hr>
                 <h1 className="uploads-title">Upload Video</h1>
+                <hr className="hidden" />
                 <p className="uploads-thumbnail__title">Video Thumbnail</p>
                 <div className="uploads-image__container">
                     <img src={VideoPreview} alt="" className="uploads-image"/>
                 </div>
 
-                <form className="uploads-form">
+                <form className="uploads-form" onSubmit={this.handleUpload}>
                     <label className="uploads-input__title-label">TITLE YOUR VIDEO</label>
                         <input type="text" className="uploads-input__title" name="title" onChange={this.handleChangeTitle} value={this.state.title} required/>
                     <label className="uploads-input__description-label">ADD A VIDEO DESCRIPTION</label>
                         <input type="text" className="uploads-input__description" name="description" onChange={this.handleChangeDescription} value={this.state.description} required />
-                    
-                        <button type="submit"  className="uploads-button__publish"> <img src={publishButton} alt="Button" />
-                            PUBLISH
-                        </button>
+                       
+                        <hr className="hidden" />
+                       
+                        <div className="buttons-container">
+                        <div className="submit-button__container">
+                            <button type="submit"  className="uploads-button__publish"> <img src={publishButton} alt="Button" /> <p>PUBLISH</p></button>
+                        </div>
 
                     <button className="uploads-button__cancel" onClick={this.handleCancel}>
                         CANCEL
                     </button>
+
+                    <div className="submit-button__container-hidden">
+                            <button type="submit"  className="uploads-button__publish"> <img src={publishButton} alt="Button" /> <p>PUBLISH</p></button>
+                        </div>
+                    </div>
+                    
+                
 
                 </form>
             </section>

@@ -7,7 +7,6 @@ import { API_URL } from "../App";
 
 // const apiKey = "427f0887-9b87-4dad-a425-2d49ecd8c162";
 
-
 class Videos extends React.Component {
     constructor(props) {
         super(props);
@@ -23,7 +22,6 @@ class Videos extends React.Component {
         }
     }
 
-  
     fetchVideoDetails() {
         const apiURL = `${API_URL}`
         axios.get(apiURL)
@@ -39,8 +37,6 @@ class Videos extends React.Component {
         })
     }
 
-    
-
     componentDidMount() {
         this.fetchVideoDetails();
         let videoidentification = this.props.match.params.videoID
@@ -54,9 +50,16 @@ class Videos extends React.Component {
     }
     
     componentDidUpdate(prevProps, prevState) {
-       if (prevState.currentVideo.id !== this.props.match.params.videoID) {
-        console.log("componentDidUpdate")
-       }
+        let videoidentification = this.props.match.params.videoID
+        axios.get("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
+        .then(response => {
+            let mainvideoData = response.data
+            if (prevState.currentVideo.id !== this.props.match.params.videoID) {
+                this.setState({
+                    currentVideo: mainvideoData,
+                })
+            }
+        })
     }
 
     componentWillUnmount() {
@@ -66,12 +69,12 @@ class Videos extends React.Component {
     render() {
 
         return (
-           <div>
+           <div className="video-player">
              <Player currentVideoDetails = {this.state.currentVideo}/>
-           
+                <section className="next-videos__video-list">
                 <p className="next-videos__label">Next Videos</p>
                {this.state.data.map((video) =>
-               <div key={video.id} className="Videos__item">
+               <div key={video.id} className="Videos__video">
                     <Video
                         key={video.id}
                         id = {video.id}
@@ -83,8 +86,10 @@ class Videos extends React.Component {
                         video = {video.video}
                         handleSubmit = {this.handleSubmit}
                     />
+                    
                  </div>
                )} 
+               </section>
            </div>
         )
     }
@@ -93,7 +98,7 @@ class Videos extends React.Component {
 export default Videos;
 
 /*
-    CONST vIDEOS = (PROPS) => {
+    const videos = (props) => {
         const newVideoArray = props.video.filter((video, index) => {
             console.log(video.id, props.currentVideo);
             return video.id !== props.currentVideo;
