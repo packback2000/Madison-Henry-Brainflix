@@ -16,6 +16,8 @@ function CommentList(props) {
         return formattedDate;
     }
 
+
+
     const [comment, setComment] = useState('');
 
     const formHandler = (event) => {
@@ -66,7 +68,7 @@ function CommentList(props) {
 
             
             <section className="comments-section">
-                <p className="comments-number">Comments</p>
+                <p className="comments-number">{props.currentVideoDetails.comments.length} Comments</p>
                 <form className='comment-form' onSubmit={formHandler}>
             
                         <input type="image" className='comment-form__image' src={Mohan} alt="text" value={props.image} />
@@ -80,14 +82,14 @@ function CommentList(props) {
                         </div>
                 </form>
                 
-             <div className="comments-comments" id={props.id}>{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
-                <div className="comments-list" id={props.id}  >
+             <div className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
+                <div className="comments-list">
                     
-                    <ul className="comment-list__one" key={props.id} id={props.id}>
+                    <ul className="comment-list__one">
                         <li className="comments-list__avatar"><img src="" alt="" key={props.id} id={props.id}></img></li>
                     </ul>
 
-                    <ul className="comment-list__two" key={props.id} id={props.id}>
+                    <ul className="comment-list__two">
                         <div className="comments-list__line1">
                         <li className="comments-list__name" key={props.id} id={props.id}>{comments.name}</li>
                         <li className="comments-list__timestamp" key={props.id} id={props.id}>{formatMyDate(comments.timestamp)}</li>
