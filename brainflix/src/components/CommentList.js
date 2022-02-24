@@ -20,7 +20,6 @@ function CommentList(props) {
 
     const formHandler = (event) => {
         event.preventDefault();
-        console.log(event)
         const formElement = event.target;
         const commentFromForm = formElement.comment.value;
         let videoidentification = props.currentVideoDetails.id
@@ -29,9 +28,20 @@ function CommentList(props) {
             name: "name"
         })
         .then((response) => {
-            console.log(response.data)
-        })
+            console.log(response.data.id)
+            })
     }
+
+    /*
+    let Delete = (event) => {
+        let videoidentification = props.currentVideoDetails.id
+        axios.get("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
+        .then(response => {
+            console.log(response)
+        })
+
+    }
+    */
 
     return (
         <div className="main-video__details">
@@ -70,20 +80,20 @@ function CommentList(props) {
                         </div>
                 </form>
                 
-             <div className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
-                <div className="comments-list">
+             <div className="comments-comments" id={props.id}>{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
+                <div className="comments-list" id={props.id}  >
                     
-                    <ul className="comment-list__one" key={props.id}>
-                        <li className="comments-list__avatar"><img src="" alt=""></img></li>
+                    <ul className="comment-list__one" key={props.id} id={props.id}>
+                        <li className="comments-list__avatar"><img src="" alt="" key={props.id} id={props.id}></img></li>
                     </ul>
 
-                    <ul className="comment-list__two" key={props.id}>
+                    <ul className="comment-list__two" key={props.id} id={props.id}>
                         <div className="comments-list__line1">
-                        <li className="comments-list__name">{comments.name}</li>
-                        <li className="comments-list__timestamp">{formatMyDate(comments.timestamp)}</li>
+                        <li className="comments-list__name" key={props.id} id={props.id}>{comments.name}</li>
+                        <li className="comments-list__timestamp" key={props.id} id={props.id}>{formatMyDate(comments.timestamp)}</li>
                         </div>
                         <div>
-                            <li className="comments-list__comment">{comments.comment}</li>
+                            <li className="comments-list__comment" key={props.id} id={props.id} >{comments.comment}</li>
                         </div>
                     </ul>
             

@@ -8,6 +8,7 @@ import Scrubber from "../Assets/Icons/scrub.svg";
 import { useRef } from "react";
 import Pause from "../Assets/Icons/pause.svg";
 import {useState} from "react";
+import { Link } from "react-router-dom";
 
 function Player(props) {
     const videoRef = useRef(null);
@@ -38,6 +39,7 @@ function Player(props) {
         }
     }
     return(
+        <Link to={`/videos/84e96018-4022-434e-80bf-000ce4cd12b8`}>
         <section className="main-video" key={props.currentVideoDetails.id} id={props.currentVideoDetails.id}>
             <div className="video-container">
             <video
@@ -99,20 +101,7 @@ function Player(props) {
                 </div>
             </div>
            </section>
+           </Link>
     )
 }
 export default Player;
-
-/*
- <div id="video-controls" className="controls" data-state="hidden">
-                <button id="playpause" type="button" data-state="play"><img src={Play} alt="play"/></button>
-                
-                <div className="progress">
-                    <progress id="progress" value="0" min="0">
-                        <span id="progress-bar"><img src={Scrubber} alt="scrubber"/><p>{props.currentVideoDetails.duration}</p></span>
-                    </progress>
-                </div>
-                <button id="volinc" type="button" data-state="volup"><img src={VolumeUp} alt="volueup"/></button>
-                <button id="fs" type="button" data-state="go-fullscreen"><img src={Fullscreen} alt="fullscreen"/></button>
-            </div>
-*/

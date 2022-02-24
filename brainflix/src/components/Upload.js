@@ -50,9 +50,9 @@ class uploadPage extends React.Component {
 
                 <form className="uploads-form" onSubmit={this.handleUpload}>
                     <label className="uploads-input__title-label">TITLE YOUR VIDEO</label>
-                        <input type="text" className="uploads-input__title" name="title" onChange={this.handleChangeTitle} value={this.state.title} required/>
+                        <input type="text" className="uploads-input__title" name="title" onChange={this.handleChangeTitle} value={this.state.title} required placeholder="ADD A TITLE TO YOUR VIDEO"/>
                     <label className="uploads-input__description-label">ADD A VIDEO DESCRIPTION</label>
-                        <input type="text" className="uploads-input__description" name="description" onChange={this.handleChangeDescription} value={this.state.description} required />
+                        <textarea type="text" className="uploads-input__description" name="description" onChange={this.handleChangeDescription} value={this.state.description} required placeholder="ADD A DESCRIPTION TO YOUR VIDEO" />
                        
                         <hr className="hidden" />
                        

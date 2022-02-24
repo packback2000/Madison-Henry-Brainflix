@@ -241,8 +241,12 @@ body {
     min-width: 150px;
   }
 }
-.Header .header-form__input:active {
-  border: 1px solid #0095FF;
+.Header .header-input__container input:focus {
+  outline: none;
+  border: 2px solid #0095FF;
+}
+.Header .header-input__container input:invalid {
+  border: 1px solid #D22D2D;
 }
 .Header .header-form__input {
   width: 100%;
@@ -350,11 +354,6 @@ body {
   padding-right: 16px;
   display: flex;
   flex-direction: column;
-  /*
-  input:invalid {
-      border: 1px solid #D22D2D
-  }
-  */
 }
 .uploads .uploads-form label {
   font-size: 12px;
@@ -371,6 +370,27 @@ body {
     padding-right: 24px;
   }
 }
+.uploads .uploads-form input.required:invalid {
+  outline: none;
+  border: 1px solid #D22D2D;
+}
+.uploads .uploads-form input:not:valid {
+  border: 1px solid #E1E1E1;
+}
+.uploads .uploads-form textarea {
+  display: flex;
+  min-width: 240px;
+  max-width: 100%;
+  border-radius: 4px;
+  border: 1px solid #E1E1E1;
+  padding: 12px;
+  font-family: AvenirNextRegular;
+}
+@media (min-width: 480px) {
+  .uploads .uploads-form textarea {
+    margin-bottom: 16px;
+  }
+}
 .uploads .uploads-form input {
   display: flex;
   min-width: 240px;
@@ -384,8 +404,9 @@ body {
     margin-bottom: 16px;
   }
 }
-.uploads .uploads-form input:focus {
-  border: #0095FF;
+.uploads .uploads-form input:focus, .uploads .uploads-form textarea:focus {
+  outline: none;
+  border: 2px solid #0095FF;
 }
 .uploads .uploads-form .uploads-button__publish:hover {
   background-color: #0065AD;
@@ -629,6 +650,10 @@ body {
   flex-direction: column;
   width: 100%;
   margin-left: 16px;
+}
+.comments-section .comment-form .comment-form__input-container input:focus {
+  outline: none;
+  border: 2px solid #0095FF;
 }
 @media (min-width: 480px) {
   .comments-section .comment-form .comment-form__input-container {
