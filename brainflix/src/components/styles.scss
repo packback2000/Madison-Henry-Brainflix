@@ -710,6 +710,7 @@ body {
     .comments-list {
         padding: 0px;
         @include MobileBodyCopy;
+        border-top: 1px solid $Mercury;
     
         @media (max-width: 479px) {
             display: flex;

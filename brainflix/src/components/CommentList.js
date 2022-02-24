@@ -16,23 +16,21 @@ function CommentList(props) {
         return formattedDate;
     }
 
-    
-
     const [comment, setComment] = useState('');
 
     const formHandler = (event) => {
         event.preventDefault();
-        const postData = {
-            "name": "name",
-            "comment": "comment"
-        }
-        console.log(postData)
-        console.log(props.currentVideoDetails.id)
+        console.log(event)
+        const formElement = event.target;
+        const commentFromForm = formElement.comment.value;
         let videoidentification = props.currentVideoDetails.id
-        axios.post("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/comments/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162", postData)
-            .then((response) => {
-                console.log(response)
-            })
+        axios.post("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/comments/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162", {
+            comment: commentFromForm,
+            name: "name"
+        })
+        .then((response) => {
+            console.log(response.data)
+        })
     }
 
     return (
@@ -64,19 +62,21 @@ function CommentList(props) {
                         <input type="image" className='comment-form__image' src={Mohan} alt="text" value={props.image} />
                         <div className='comment-form__input-container'>
                         <label className="under480">JOIN THE CONVERSATION
-                        <input type="text" className='comment-form__input'placeholder='Add a new comment' value={comment} onChange={(event) => {setComment(event.target.value)}} />
+                        <input type="text" className='comment-form__input'placeholder='Add a new comment' value={comment} onChange={(event) => {setComment(event.target.value)}} name="comment" />
                         </label>
                         <div className="comment-form__button-container">
                             <button type='submit' className='comment-form__button' onClick={props.currentVideoDetails.changeVideo}><img src={Comment} alt="Comment"/><p>Comment</p></button>
                         </div>
                         </div>
                 </form>
-             
+                
              <div className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
                 <div className="comments-list">
+                    
                     <ul className="comment-list__one" key={props.id}>
                         <li className="comments-list__avatar"><img src="" alt=""></img></li>
                     </ul>
+
                     <ul className="comment-list__two" key={props.id}>
                         <div className="comments-list__line1">
                         <li className="comments-list__name">{comments.name}</li>
@@ -88,6 +88,7 @@ function CommentList(props) {
                     </ul>
             
                 </div>): <div>Comments Loading</div>}</div>
+                <hr/>
                 </section>
                 </div>
     )

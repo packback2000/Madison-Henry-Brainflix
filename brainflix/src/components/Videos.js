@@ -89,7 +89,6 @@ class Videos extends React.Component {
                         channel={video.channel}
                         handleClick = {this.handleClick}
                         handleDelete = {this.handleDelete}
-                        video = {video.video}
                         handleSubmit = {this.handleSubmit}
                     />
                     
