@@ -4,6 +4,7 @@ import axios from "axios";
 import Player from "./Player.js";
 import Video from "./Video";
 import { API_URL } from "../App";
+import CommentList from "./CommentList";
 
 // const apiKey = "427f0887-9b87-4dad-a425-2d49ecd8c162";
 
@@ -47,6 +48,7 @@ class Videos extends React.Component {
                 currentVideo: mainvideoData,
             })
         })
+        
     }
     
     componentDidUpdate(prevProps, prevState) {
@@ -65,12 +67,16 @@ class Videos extends React.Component {
     componentWillUnmount() {
         console.log('componentWillUnmount');
       }
+
  
     render() {
 
         return (
-           <div className="video-player">
+           <section className="video-player">
              <Player currentVideoDetails = {this.state.currentVideo}/>
+
+            <section className="video-details__next-videos">
+             <CommentList currentVideoDetails = {this.state.currentVideo} />
                 <section className="next-videos__video-list">
                 <p className="next-videos__label">Next Videos</p>
                {this.state.data.map((video) =>
@@ -90,7 +96,8 @@ class Videos extends React.Component {
                  </div>
                )} 
                </section>
-           </div>
+               </section>
+           </section>
         )
     }
 }

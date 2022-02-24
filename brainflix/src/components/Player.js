@@ -1,94 +1,103 @@
 import React from "react";
-import Mohan from "../Assets/Images/Mohan-muruge.jpg";
 import "./styles.css";
-import Scrubber from "../Assets/Icons/scrub.svg";
 import Play from "../Assets/Icons/play.svg";
-import Fullscreen from "../Assets/Icons/fullscreen.svg";
-import VolumeUp from "../Assets/Icons/volume_up.svg";
-import Comment from "../Assets/Icons/add_comment.svg";
-
+import FullScreen from "../Assets/Icons/fullscreen.svg";
+import Volume from "../Assets/Icons/volume_up.svg";
+import VolumeOff from "../Assets/Icons/volume_off.svg";
+import Scrubber from "../Assets/Icons/scrub.svg";
+import { useRef } from "react";
+import Pause from "../Assets/Icons/pause.svg";
+import {useState} from "react";
 
 function Player(props) {
+    const videoRef = useRef(null);
 
-    const formatMyDate = (timestamp) => {
-        const date = new Date(timestamp)
-        let month = date.getUTCMonth() + 1;
-        let day = date.getUTCDate();
-        const year = date.getUTCFullYear();
-        const formattedDate = day + "/" + month + "/" + year;
-        return formattedDate;
+    const [playing, setPlaying] = useState(false);
+    const [sound, setSound] = useState(false);
+    const [videoTime, setVideoTime] = useState(0);
+
+    const videoPlayerFunction = (controls) => {
+        if (controls === "play") {
+            videoRef.current.play();
+            setPlaying(true);
+            let vid = document.getElementById(props.currentVideoDetails.id);
+            setVideoTime(vid.duration);
+        } else if (controls === "pause") {
+            videoRef.current.pause();
+            setPlaying(false);
+        }
     }
-    
+
+    const videoSoundFunction = (sound) => {
+        if (sound === "on") {
+            videoRef.current.on();
+            setSound(true);
+        } else if (sound === "off") {
+            videoRef.current.off();
+            setSound(false);
+        }
+    }
     return(
         <section className="main-video" key={props.currentVideoDetails.id} id={props.currentVideoDetails.id}>
             <div className="video-container">
             <video
-                controls
+                ref={videoRef}
                 src = {props.video}
                 poster={props.currentVideoDetails.image}
                 className="main-video__video"
                 id={props.currentVideoDetails.id}
-            >
+            >   
                 <source src={props.currentVideoDetails.video} />
             </video>
-            </div>
+            <div className="video-controls__container">
+                    <div className="controls">         
+                        <div className="video-controls__time">
+                       
+                       {playing ? (
+                           <img
+                            onClick={() => videoPlayerFunction("pause")}
+                            className="controls-icon"
+                            alt=""
+                            src={Pause}
+                            />
+                       ) : (
+                        <img 
+                            className="controls-icon" 
+                            alt="" 
+                            src={Play}
+                            onClick={() => videoPlayerFunction("play")}
+                        />
+                       )}
+                        
+                        <div className="video-time__progressbar-container">
+                            <img src={Scrubber} alt="" className="progressbar" /> 
+                            <p className="video-time">
+                                0:00 - 4:10
+                            </p>
+                        </div>
+                       
+                        <img className="controls-icon" alt="" src={FullScreen}/>
 
-            <div className="main-video__details">
-            <section className="main-video__description-box">
-            <p className="main-video__description-title">{props.currentVideoDetails.title}</p>
-            <hr/>
-                <ul key={props.currentVideoDetails.id} className="main-video__description">
-                    <div className="main-video__description-box1">
-                        <li className="main-video__description-channel">{props.currentVideoDetails.channel}</li>
-                        <li className="main-video__description-date">{formatMyDate(props.currentVideoDetails.timestamp)}</li>
+                        {sound ? (
+                            <img 
+                                className="controls-icon" 
+                                alt="" 
+                                src={Volume}
+                                onClick={() => videoSoundFunction("on")}
+                            />
+                        ) : (
+                            <img 
+                                className="controls-icon"
+                                alt=""
+                                src={VolumeOff}
+                                onClick = {() => videoSoundFunction("off")}
+                            />
+                        )}
+                        
                     </div>
-
-                    <div className="main-video__description-box2">
-                        <li className="main-video__description-views">{props.currentVideoDetails.views}</li>
-                        <li className="main-video__description-likes">{props.currentVideoDetails.likes}</li>
-                    </div>
-                </ul>
-                <hr/>
-
-                <p>{props.currentVideoDetails.description}</p>
-            </section>
-
-            
-            <section className="comments-section">
-                <p className="comments-number">Comments</p>
-                <form className='comment-form' onSubmit={props.handleSubmit}>
-            
-                        <input type="image" className='comment-form__image' src={Mohan} alt="text" value={props.image} />
-                        <div className='comment-form__input-container'>
-                        <label className="under480">JOIN THE CONVERSATION
-                        <input type="text" className='comment-form__input'placeholder='Add a new comment' value={props.text} />
-                        </label>
-                        <div className="comment-form__button-container">
-                            <button type='submit' className='comment-form__button' onClick={props.currentVideoDetails.changeVideo}><img src={Comment} alt="Comment"/><p>Comment</p></button>
-                        </div>
-                        </div>
-                </form>
-             
-             <div className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
-                <div className="comments-list">
-                    <ul className="comment-list__one" key={props.id}>
-                        <li className="comments-list__avatar"><img src="" alt=""></img></li>
-                    </ul>
-                    <ul className="comment-list__two" key={props.id}>
-                        <div className="comments-list__line1">
-                        <li className="comments-list__name">{comments.name}</li>
-                        <li className="comments-list__timestamp">{formatMyDate(comments.timestamp)}</li>
-                        </div>
-                        <div>
-                            <li className="comments-list__comment">{comments.comment}</li>
-                        </div>
-                    </ul>
-            
-                </div>): <div>Comments Loading</div>}</div>
-                </section>
                 </div>
-
-                <hr />
+                </div>
+            </div>
            </section>
     )
 }
