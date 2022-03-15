@@ -1,4 +1,3 @@
-import VideoPreview from "../Assets/Images/Upload-video-preview.jpg";
 import React from "react";
 import "./styles.css";
 import publishButton from "../Assets/Icons/publish.svg";
