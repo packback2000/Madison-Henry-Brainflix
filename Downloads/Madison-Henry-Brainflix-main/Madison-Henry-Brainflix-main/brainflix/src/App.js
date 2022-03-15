@@ -4,7 +4,6 @@ import Videos from './components/Videos';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import uploadPage from './components/Upload';
 
-export const API_URL = "https://project-2-api.herokuapp.com/videos/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162"
 
 function App() { 
   return (

@@ -2,8 +2,9 @@ import VideoPreview from "../Assets/Images/Upload-video-preview.jpg";
 import React from "react";
 import "./styles.css";
 import publishButton from "../Assets/Icons/publish.svg";
+import axios from "axios";
 
-class uploadPage extends React.Component {
+export default class uploadPage extends React.Component {
     state = {
         video: [],
         title: "",
@@ -22,19 +23,15 @@ class uploadPage extends React.Component {
           })
       }
 
-        handleCancel = () => {
-            this.setState({
-                title: "",
-                description: ""
-            })
-        }
-
         handleUpload = (e) => {
             e.preventDefault()
+            axios.post('http://localhost:5001/videos', {
+                title: this.state.title,
+                description: this.state.description,
+            })
             alert("video was uploaded")
             this.props.history.push("/videos/84e96018-4022-434e-80bf-000ce4cd12b8")
-        }
-    
+        }    
 
     render() {
         
@@ -45,7 +42,7 @@ class uploadPage extends React.Component {
                 <hr className="hidden" />
                 <p className="uploads-thumbnail__title">Video Thumbnail</p>
                 <div className="uploads-image__container">
-                    <img src={VideoPreview} alt="" className="uploads-image"/>
+                    <img src="http://localhost:5001/static/Upload-video-preview.jpg" alt="" className="uploads-image"/>
                 </div>
 
                 <form className="uploads-form" onSubmit={this.handleUpload}>
@@ -78,5 +75,3 @@ class uploadPage extends React.Component {
         )
     }
 }
-
-export default uploadPage;

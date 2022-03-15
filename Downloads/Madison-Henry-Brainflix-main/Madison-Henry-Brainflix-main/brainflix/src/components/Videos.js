@@ -3,10 +3,9 @@ import "./styles.css";
 import axios from "axios";
 import Player from "./Player.js";
 import Video from "./Video";
-import { API_URL } from "../App";
 import CommentList from "./CommentList";
 
-// const apiKey = "427f0887-9b87-4dad-a425-2d49ecd8c162";
+
 
 class Videos extends React.Component {
     constructor(props) {
@@ -24,8 +23,7 @@ class Videos extends React.Component {
     }
 
     fetchVideoDetails() {
-        const apiURL = `${API_URL}`
-        axios.get(apiURL)
+        axios.get('http://localhost:5001/videos')
         .then((response) => {
             const apiData = response.data;
             this.setState({
@@ -41,7 +39,7 @@ class Videos extends React.Component {
     componentDidMount() {
         this.fetchVideoDetails();
         let videoidentification = this.props.match.params.videoID
-        axios.get("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
+        axios.get('http://localhost:5001/videos/'+ videoidentification)
         .then(response => {
             let mainvideoData = response.data
             this.setState({
@@ -53,7 +51,7 @@ class Videos extends React.Component {
     
     componentDidUpdate(prevProps, prevState) {
         let videoidentification = this.props.match.params.videoID
-        axios.get("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
+        axios.get('http://localhost:5001/videos/'+ videoidentification)
         .then(response => {
             let mainvideoData = response.data
             if (prevState.currentVideo.id !== this.props.match.params.videoID) {
