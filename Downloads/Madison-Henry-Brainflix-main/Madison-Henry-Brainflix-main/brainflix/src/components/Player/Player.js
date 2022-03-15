@@ -1,12 +1,12 @@
 import React from "react";
-import "./styles.css";
-import Play from "../Assets/Icons/play.svg";
-import FullScreen from "../Assets/Icons/fullscreen.svg";
-import Volume from "../Assets/Icons/volume_up.svg";
-import VolumeOff from "../Assets/Icons/volume_off.svg";
-import Scrubber from "../Assets/Icons/scrub.svg";
+import "../../styles/styles.css"
+import Play from "../../Assets/Icons/play.svg";
+import FullScreen from "../../Assets/Icons/fullscreen.svg";
+import Volume from "../../Assets/Icons/volume_up.svg";
+import VolumeOff from "../../Assets/Icons/volume_off.svg";
+import Scrubber from "../../Assets/Icons/scrub.svg";
 import { useRef } from "react";
-import Pause from "../Assets/Icons/pause.svg";
+import Pause from "../../Assets/Icons/pause.svg";
 import {useState} from "react";
 import { Link } from "react-router-dom";
 

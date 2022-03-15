@@ -1,9 +1,10 @@
 import React from "react";
-import Mohan from "../Assets/Images/Mohan-muruge.jpg";
-import "./styles.css";
-import Comment from "../Assets/Icons/add_comment.svg";
+import Mohan from "../../Assets/Images/Mohan-muruge.jpg";
+import "../../styles/styles.css"
+import Comment from "../../Assets/Icons/add_comment.svg";
 import axios from "axios";
 import { useState } from "react";
+
 
 function CommentList(props) {
 
@@ -33,17 +34,6 @@ function CommentList(props) {
             console.log(response.data.id)
             })
     }
-
-    /*
-    let Delete = (event) => {
-        let videoidentification = props.currentVideoDetails.id
-        axios.get("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162")
-        .then(response => {
-            console.log(response)
-        })
-
-    }
-    */
 
     return (
         <div className="main-video__details">
