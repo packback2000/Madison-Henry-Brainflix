@@ -1,9 +1,9 @@
 import React from "react";
-import "./styles.css";
+import "../../styles/styles.css"
 import axios from "axios";
-import Player from "./Player.js";
-import Video from "./Video";
-import CommentList from "./CommentList";
+import Player from "../Player/Player.js";
+import Video from "../../pages/Video";
+import CommentList from "../CommentList/CommentList";
 
 
 

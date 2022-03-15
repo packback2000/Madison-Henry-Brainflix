@@ -1,8 +1,8 @@
-import Header from './components/Header'
+import Header from './components/Header/Header'
 import React from 'react';
-import Videos from './components/Videos';
+import Videos from './components/Videos/Videos';
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import uploadPage from './components/Upload';
+import uploadPage from './pages/Upload';
 
 
 function App() { 
