@@ -1,5 +1,4 @@
 import React from "react";
-import Mohan from "../../Assets/Images/Mohan-muruge.jpg";
 import "../../styles/styles.css"
 import Comment from "../../Assets/Icons/add_comment.svg";
 import axios from "axios";
@@ -63,7 +62,7 @@ function CommentList(props) {
                   ): <div>Comments Loading</div>}</p>
                 <form className='comment-form' onSubmit={formHandler}>
             
-                        <input type="image" className='comment-form__image' src={Mohan} alt="text" value={props.image} />
+                        <input type="image" className='comment-form__image' src='http://localhost:5001/static/Mohan-muruge.jpg' alt="text" value={props.image} />
                         <div className='comment-form__input-container'>
                         <label className="under480">JOIN THE CONVERSATION
                         <input type="text" className='comment-form__input'placeholder='Add a new comment' value={comment} onChange={(event) => {setComment(event.target.value)}} name="comment" />

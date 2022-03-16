@@ -1,10 +1,10 @@
 import React from 'react';
-import "../../styles/styles.css";
+import '../../pages/styles.css';
 import Logo from '../../Assets/Logo/BrainFlix-logo.svg';
-import Mohan from '../../Assets/Images/Mohan-muruge.jpg';
 import { Link } from "react-router-dom";
+import Upload from "../../Assets/Icons/upload.svg";
 
-class Comments extends React.Component {
+export default class Header extends React.Component{
     state = {
         searchTerm: " ",
     }
@@ -35,16 +35,14 @@ class Comments extends React.Component {
                     <div className='header-input__container'>
                     <input type="text" onChange={this.handleChange} className='header-form__input' placeholder="Search" />
                     
-                    <input type="image" className='header-form__image' src={Mohan} alt='Mohan' />
+                    <input type="image" className='header-form__image' src='http://localhost:5001/static/Mohan-muruge.jpg' alt='Mohan' />
                     </div>
                     <Link to={"/uploads"}>
-                        <button type='submit' className='header-form__button'>Upload</button>
+                        <button type='submit' className='header-form__button'><img src={Upload} alt="Upload Here" /><p>Upload</p></button>
                     </Link>
-                    <input type="image" className='mohan-over480' src={Mohan} alt="text" />
+                    <input type="image" className='mohan-over480' src='http://localhost:5001/static/Mohan-muruge.jpg' alt="text" />
                 </form>
             </section>
         )
     }
 }
-
-export default Comments;
