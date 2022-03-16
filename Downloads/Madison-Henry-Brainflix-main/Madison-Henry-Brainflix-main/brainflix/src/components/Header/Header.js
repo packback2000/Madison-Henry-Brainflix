@@ -38,7 +38,7 @@ export default class Header extends React.Component{
                     <input type="image" className='header-form__image' src='http://localhost:5001/static/Mohan-muruge.jpg' alt='Mohan' />
                     </div>
                     <Link to={"/uploads"}>
-                        <button type='submit' className='header-form__button'><img src={Upload} alt="Upload Here" /><p>Upload</p></button>
+                        <button type='submit' className='header-form__button'><img src={Upload} alt="Upload Here" ></img>Upload</button>
                     </Link>
                     <input type="image" className='mohan-over480' src='http://localhost:5001/static/Mohan-muruge.jpg' alt="text" />
                 </form>
