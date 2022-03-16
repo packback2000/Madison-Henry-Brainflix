@@ -30,7 +30,6 @@ function CommentList(props) {
         .then((response) => {
             console.log(response.data.id)
             })
-
     }
 
     return (

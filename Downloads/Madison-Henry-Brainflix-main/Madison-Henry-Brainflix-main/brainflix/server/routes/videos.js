@@ -53,8 +53,8 @@ router.post('/', (req,res) => {
 })
 
 router.post('/:videoID/comments', (req,res) => {
-
     const id = crypto.randomBytes(16).toString("hex");
+    
     const formatMyDate = (timestamp) => {
         const date = new Date(timestamp)
         let month = date.getUTCMonth() + 1;
@@ -66,41 +66,15 @@ router.post('/:videoID/comments', (req,res) => {
     const comment = {
         id: id,
         timestamp: formatMyDate(),
-        name: "User",
+        name: req.body.name,
         comment: req.body.comment,
+        likes: 0,
     }
 
-    let currentID = req.params.videoID;
-    videoList = readData();
-    let ID = videoList.filter((videoList) => {
-        if (videoList.id === currentID){
-        let commentList = videoList.comments
-        console.log(commentList)
-    }
-        
-        
-    })
-
-    console.log(ID)
-
+    let videoList = readData();
+    const singleVideo = videoList.find(vid => vid.id === req.params.videoID)
+    let commentList = singleVideo.comments;
+    commentList.push(comment);
 });
 
 module.exports = router;
-
- 
-    
-//     insideFile = fs.readFile('..data/database.json', 'utf8',(err,data) => {
-//         videoData = JSON.parse(data);
-//         currentID = req.params.videoID;
-//         let iD = videoData.filter((videoList)=> {
-//             if (videoList.id === currentID) {
-//                 return (videoList.comments)
-//             }
-//         })
-//         res.json(iD[comments])
-//     })
-// })
-
-// router.delete('/videos/:videoId/comments/:commentID', (req,res) => {
-
-// })
