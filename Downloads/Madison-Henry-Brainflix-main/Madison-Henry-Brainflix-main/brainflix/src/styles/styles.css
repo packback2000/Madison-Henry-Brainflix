@@ -939,4 +939,17 @@ body {
   position: absolute;
   margin: auto;
   color: #FFFFFF;
+}
+
+@media (min-width: 1050px) {
+  .video-player {
+    width: 80%;
+    margin: auto;
+  }
+  .video-player .video-container {
+    width: 100%;
+  }
+  .video-player .main-video {
+    width: 80%;
+  }
 }/*# sourceMappingURL=styles.css.map */

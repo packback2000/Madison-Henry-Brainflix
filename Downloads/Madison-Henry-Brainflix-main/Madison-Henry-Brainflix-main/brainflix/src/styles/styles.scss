@@ -945,3 +945,18 @@ body {
         color: #FFFFFF;
       }
 }
+
+.video-player {
+   @media (min-width: 1050px) {
+       width: 80%;
+       margin: auto;
+
+       .video-container{
+           width: 100%;
+       }
+
+       .main-video {
+           width: 80%;
+       }
+   } 
+}
