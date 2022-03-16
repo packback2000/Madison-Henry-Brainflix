@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../pages/styles.css';
+import '../../styles/styles.css';
 import Logo from '../../Assets/Logo/BrainFlix-logo.svg';
 import { Link } from "react-router-dom";
 import Upload from "../../Assets/Icons/upload.svg";

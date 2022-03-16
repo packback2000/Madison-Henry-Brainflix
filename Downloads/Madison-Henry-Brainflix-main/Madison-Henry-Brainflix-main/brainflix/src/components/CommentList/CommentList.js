@@ -1,9 +1,8 @@
 import React from "react";
-import "../../styles/styles.css"
+import "../../styles/styles.css";
 import Comment from "../../Assets/Icons/add_comment.svg";
 import axios from "axios";
 import { useState } from "react";
-
 
 function CommentList(props) {
 
@@ -17,21 +16,21 @@ function CommentList(props) {
     }
 
 
-
     const [comment, setComment] = useState('');
 
     const formHandler = (event) => {
         event.preventDefault();
         const formElement = event.target;
         const commentFromForm = formElement.comment.value;
-        let videoidentification = props.currentVideoDetails.id
-        axios.post("https://project-2-api.herokuapp.com/videos/" + videoidentification + "/comments/?api_key=427f0887-9b87-4dad-a425-2d49ecd8c162", {
+        let videoID = props.currentVideoDetails.id
+        axios.post('http://localhost:5001/videos/'+ videoID + "/comments", {
             comment: commentFromForm,
             name: "name"
         })
         .then((response) => {
             console.log(response.data.id)
             })
+
     }
 
     return (
@@ -40,14 +39,14 @@ function CommentList(props) {
             <p className="main-video__description-title">{props.currentVideoDetails.title}</p>
             <hr/>
                 <ul key={props.currentVideoDetails.id} className="main-video__description">
-                    <div className="main-video__description-box1">
-                        <li className="main-video__description-channel">{props.currentVideoDetails.channel}</li>
-                        <li className="main-video__description-date">{formatMyDate(props.currentVideoDetails.timestamp)}</li>
+                    <div className="main-video__description-box1" id={props.currentVideoDetails.id}>
+                        <li className="main-video__description-channel" id={props.currentVideoDetails.id}>{props.currentVideoDetails.channel}</li>
+                        <li className="main-video__description-date" id={props.currentVideoDetails.id}>{formatMyDate(props.currentVideoDetails.timestamp)}</li>
                     </div>
 
-                    <div className="main-video__description-box2">
-                        <li className="main-video__description-views">{props.currentVideoDetails.views}</li>
-                        <li className="main-video__description-likes">{props.currentVideoDetails.likes}</li>
+                    <div className="main-video__description-box2" id={props.currentVideoDetails.id}>
+                        <li className="main-video__description-views" id={props.currentVideoDetails.id}>{props.currentVideoDetails.views}</li>
+                        <li className="main-video__description-likes" id={props.currentVideoDetails.id}>{props.currentVideoDetails.likes}</li>
                     </div>
                 </ul>
                 <hr/>
@@ -57,9 +56,9 @@ function CommentList(props) {
 
             
             <section className="comments-section">
-                <p className="comments-number">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
+                <div className="comments-number">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
                   <p>{comments.length}</p>
-                  ): <div>Comments Loading</div>}</p>
+                  ): <div>Comments Loading</div>}</div>
                 <form className='comment-form' onSubmit={formHandler}>
             
                         <input type="image" className='comment-form__image' src='http://localhost:5001/static/Mohan-muruge.jpg' alt="text" value={props.image} />
@@ -72,25 +71,25 @@ function CommentList(props) {
                         </div>
                         </div>
                 </form>
-                
-             <div className="comments-comments">{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
-                <div className="comments-list">
+
+             <div className="comments-comments" id={props.currentVideoDetails.id}>{props.currentVideoDetails.comments ? props.currentVideoDetails.comments.map((comments) =>
+                <div className="comments-list" id={props.id} >
                     
                     <ul className="comment-list__one">
                         <li className="comments-list__avatar"><img src="" alt="" key={props.id} id={props.id}></img></li>
                     </ul>
 
-                    <ul className="comment-list__two">
-                        <div className="comments-list__line1">
+                    <ul className="comment-list__two" onClick={props.deleteComment}>
+                        <div className="comments-list__line1" id={props.id}>
                         <li className="comments-list__name" key={props.id} id={props.id}>{comments.name}</li>
                         <li className="comments-list__timestamp" key={props.id} id={props.id}>{formatMyDate(comments.timestamp)}</li>
                         </div>
-                        <div>
+                        <div id={props.id}>
                             <li className="comments-list__comment" key={props.id} id={props.id} >{comments.comment}</li>
                         </div>
                     </ul>
-            
-                </div>): <div>Comments Loading</div>}</div>
+                </div>): <div>Comments Loading</div>}
+                </div>
                 <hr/>
                 </section>
                 </div>
